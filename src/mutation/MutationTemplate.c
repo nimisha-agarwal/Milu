@@ -67,7 +67,7 @@ void milu_mutation_analyse(GPtrArray * functions, GPtrArray * mut_operators, GPt
     for (gint i = 0 ; i < functions->len; i++)
     {
     	ASTNode * curr_func = g_ptr_array_index(functions, i);
-	    parse_tree_node_traverse_pre_order (curr_func, &mutation_template_check_mutation, NULL);
+	    parse_tree_node_traversep_re_order (curr_func, &mutation_template_check_mutation, NULL);
     }
 
 

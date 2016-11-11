@@ -77,6 +77,13 @@ static gboolean is_ASTNode_has_text(const ASTNode * node, const gchar * text )
 	return FALSE;
 }
 
+gboolean is_ASTNode_function_parameter(const ASTNode * node) {
+	ASTNode * parent = node->parent;
+	if(is_ASTNode_func_decl_with_body(parent))
+		return TRUE;
+	return FALSE;
+}
+
 gboolean is_ASTNode_bitwise_and_assignment_op(const ASTNode * node)
 {
 	return is_ASTNode_kind_binary_operator(node) && is_ASTNode_has_text(node, "&=");
@@ -661,4 +668,9 @@ ASTNode * ASTNode_new_alloca_substitution_for_calloc(ASTNode* left, ASTNode* rig
 	ASTNode * multiply_node=ASTNode_new_bop_node("*", unexposed_node_left, unexposed_node_right);
 	ASTNode_append_child(call_node, multiply_node);
 	return unexposed_node;
+}
+
+gboolean is_ASTNode_pointer_op(const ASTNode * node)
+{
+	return is_ASTNode_kind_binary_operator(node) && is_ASTNode_has_text(node, "->");
 }

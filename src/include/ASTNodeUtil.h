@@ -690,6 +690,8 @@ gboolean ASTNode_restore_free_statement(ASTNode* node, ASTNode* children);
  **/
 ASTNode * ASTNode_new_alloca_substitution_for_calloc(ASTNode* left, ASTNode* right);
 
+gboolean is_ASTNode_pointer_op(const ASTNode * node);
+
 #endif /* ASTNODEUTIL_H_ */
 
 /**@}*/

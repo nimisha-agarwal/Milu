@@ -142,6 +142,7 @@ Operator * get_Austin_CRCR_operator();
 Operator * get_SSDL_operator();
 Operator * get_ABS_operator();
 Operator * get_UOI_operator();
+Operator * get_TRAV_operator();
 // free
 
 #endif /* MUTATIONOPERATORS_H_ */

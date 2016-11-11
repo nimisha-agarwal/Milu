@@ -231,5 +231,7 @@ Mutator * mutator_austin_milu_integer_constant_replacement();
 
 Mutator * mutator_milu_statement_deletion();
 
+Mutator * mutator_milu_next_trav_replacement();
+
 #endif /* MUTATOR_H_ */
 /**@}*/
