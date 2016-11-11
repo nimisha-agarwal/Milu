@@ -172,12 +172,15 @@ GPtrArray * milu_generate_mutants_by_order(const Project * project, gint order_b
 {
 	g_assert(project && "Invalid project!");
 	g_assert(order_begin > 0 && order_end > 0 && "Invalid order inputs!");
+	printf("trace1\n");
 
 	GPtrArray * mutants = g_ptr_array_new();
 
 	for(gint i = order_begin; i<= order_end; i++)
 	{
+		printf("trace2\n");
 		GPtrArray * curr_mutants = mutation_template_generate_mutants( project->mutation_num_template,  i, project->mutants_path);
+		printf("trace3\n");
 		milu_utility_append_gptrarray(mutants, curr_mutants);
 		g_ptr_array_free(curr_mutants, TRUE);
 	}

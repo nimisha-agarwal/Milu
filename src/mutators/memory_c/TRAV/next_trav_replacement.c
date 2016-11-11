@@ -28,7 +28,7 @@ static gboolean mutator_milu_next_trav_replacement_mutate(ASTNode * node, gint t
 {
 	switch(type)
 	{
-		case 1:
+		case 1: {
 			//ASTNode * leftchild = node->children;
 			/*ASTNode * rightchild = node->children->next_sibling;
 			ASTNode * nextchild = ASTNode_new(rightchild->kind, ,rightchild->cx);
@@ -41,11 +41,12 @@ static gboolean mutator_milu_next_trav_replacement_mutate(ASTNode * node, gint t
 			nextchild->prev_sibling = node;
 			nextchild->parent = newnode;*/
 			//ASTNode_replace(leftchild, newnode);
-			ASTNode * newnode = ASTNode_new(node->kind, ,node->cx);
+
+			ASTNode * newnode = ASTNode_new(node->kind, NULL, node->cx);
 			ASTNode * nodechild = node->children;
-			ASTNode * newchildren = ASTNode_new(nodechild->kind, ,nodechild->cx);
+			ASTNode * newchildren = ASTNode_new(nodechild->kind, NULL, nodechild->cx);
 			ASTNode * nodechildsibling = nodechild->next_sibling;
-			ASTNode * newsibling = ASTNode_new(nodechildsibling->kind, ,nodechildsibling->cx);
+			ASTNode * newsibling = ASTNode_new(nodechildsibling->kind, NULL ,nodechildsibling->cx);
 
 			set_ASTNode_text(newnode, node->text);
 			newnode->children = newchildren;
@@ -61,6 +62,7 @@ static gboolean mutator_milu_next_trav_replacement_mutate(ASTNode * node, gint t
 			replace_subtree_with(nodechild, newnode);
 
 			return TRUE;
+		}
 
 		default:
 			break;

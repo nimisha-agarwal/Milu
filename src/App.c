@@ -99,7 +99,6 @@ int main(int argc, char *argv[ ] ) {
 	}
 	else if(g_strcmp0(milu_options_get_mut_strategy() , "rand-cov") == 0)
 	{
-
 		mutants = milu_explore_mutants_by_random_cover_fom(project, milu_options_get_rand_limit_number(),  milu_options_get_order_start() ,  milu_options_get_order_end() );
 		milu_save_mutants(mutants);
 	}
@@ -112,7 +111,10 @@ int main(int argc, char *argv[ ] ) {
 	else if(g_strcmp0(milu_options_get_mut_strategy() , "default") == 0)
 	{
 		// default mode
+		 //printf("mutate strategy");
+		printf("------$------\n");
 		 mutants = milu_generate_mutants_by_order(project, milu_options_get_order_start() , milu_options_get_order_end() );
+		 printf("mutants\n");
 		 if(!milu_options_not_save_mutants())
 		 {
 			 milu_save_mutants(mutants);
@@ -131,6 +133,7 @@ int main(int argc, char *argv[ ] ) {
 
 	if(milu_project_is_executable(project) &&  !milu_options_not_save_mutants())
 	{
+		//printf("Inside");
 		// run mutation testing
 		MILU_GLOBAL_VERBOSE ? g_log ("Milu",G_LOG_LEVEL_MESSAGE,"Run Mutants") : 0;
 		milu_run_mutation_testing(project, mutants, milu_options_get_exec_strategy());

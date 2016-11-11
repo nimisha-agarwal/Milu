@@ -230,7 +230,7 @@ GArray * mutation_id_get_random_nth_order(GArray * num_template, gint order)
 
 GPtrArray * mutation_compact_ids_get_nth_order(GArray * num_template, gint order)
 {
-
+	printf("trace5\n");
     g_assert(num_template && order > 0 && "Invalid arguments!");
 
 	if(num_template->len < order)

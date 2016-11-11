@@ -67,7 +67,7 @@ void milu_mutation_analyse(GPtrArray * functions, GPtrArray * mut_operators, GPt
     for (gint i = 0 ; i < functions->len; i++)
     {
     	ASTNode * curr_func = g_ptr_array_index(functions, i);
-	    parse_tree_node_traversep_re_order (curr_func, &mutation_template_check_mutation, NULL);
+	    parse_tree_node_traverse_pre_order (curr_func, &mutation_template_check_mutation, NULL);
     }
 
 
@@ -131,6 +131,7 @@ GPtrArray * mutation_template_generate_mutants(GArray * num_template, gint order
 	g_assert(num_template && muts_path && "Invalid arguments!");
 	g_assert(order > 0 && "Order should be greater than 1") ;
 
+	printf("trace4\n");
     GPtrArray * mcids = mutation_compact_ids_get_nth_order(num_template, order);
     GPtrArray * mids = mutation_compact_ids_expend(mcids);
 
