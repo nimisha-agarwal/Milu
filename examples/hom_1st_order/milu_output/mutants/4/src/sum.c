@@ -1,3 +1,7 @@
+int sum ( int a , int b )
+{
+return a % b ;
+}
 #include <stdio.h>
 #include <stdlib.h> 
 int test_sum_0(){
