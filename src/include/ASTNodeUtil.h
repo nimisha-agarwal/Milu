@@ -692,6 +692,8 @@ ASTNode * ASTNode_new_alloca_substitution_for_calloc(ASTNode* left, ASTNode* rig
 
 gboolean is_ASTNode_pointer_op(const ASTNode * node);
 
+gboolean is_ASTNode_pointer_address_op(const ASTNode * node);
+
 #endif /* ASTNODEUTIL_H_ */
 
 /**@}*/

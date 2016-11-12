@@ -233,5 +233,7 @@ Mutator * mutator_milu_statement_deletion();
 
 Mutator * mutator_milu_next_trav_replacement();
 
+Mutator * mutator_milu_replace_root_with_address();
+
 #endif /* MUTATOR_H_ */
 /**@}*/

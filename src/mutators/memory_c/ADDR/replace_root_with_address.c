@@ -19,24 +19,26 @@ Mutator * mutator_milu_replace_root_with_address()
 
 static gboolean mutator_milu_replace_root_with_address_node_checking(ASTNode * node)
 {
-	return is_ASTNode_function_parameter(node);
+	if(is_ASTNode_pointer_address_op(node))
+		return TRUE;
+	return FALSE;
 }
 
-static gboolean mutator_milu_replace_malloc_with_alloca_mutate(ASTNode * node, gint type)
+static gboolean mutator_milu_replace_root_with_address_mutate(ASTNode * node, gint type)
 {
 	switch(type)
 	{
-		case 1:
-			if(is_ASTNode_malloc_call(node)){
-				ASTNode_set_text(node, "alloca");
-				ASTNode_set_text(node->children, "alloca");
-				ASTNode_set_text(node->children->children, "alloca");
-			}
-			else{
-				ASTNode_set_text(node->children->next_sibling, "alloca");
-				ASTNode_set_text(node->children->next_sibling->children, "alloca");
-			}
+		case 1: {
+			ASTNode * parent = node->parent;
+			ASTNode * newparent = ASTNode_new(parent->kind, NULL, parent->cx);
+			set_ASTNode_text(newparent, parent->text);
+
+			node->parent = newparent;
+			newparent->children = node;
+
+			replace_subtree_with(node, newparent);
 			return TRUE;
+		}
 
 		default:
 			break;
@@ -45,16 +47,9 @@ static gboolean mutator_milu_replace_malloc_with_alloca_mutate(ASTNode * node, g
 	return FALSE;
 }
 
-static gboolean mutator_milu_replace_malloc_with_alloca_clean(ASTNode * node, gint type)
+static gboolean mutator_milu_replace_root_with_address_clean(ASTNode * node, gint type)
 {
-	if(is_ASTNode_malloc_call(node)){
-		ASTNode_set_text(node, "malloc");
-		ASTNode_set_text(node->children, "malloc");
-		ASTNode_set_text(node->children->children, "malloc");
-	}
-	else{
-		ASTNode_set_text(node->children->next_sibling, "malloc");
-		ASTNode_set_text(node->children->next_sibling->children, "malloc");
-	}
+	ASTNode * parent = node->parent;
+	replace_subtree_with(parent, node);
 	return TRUE;
 }

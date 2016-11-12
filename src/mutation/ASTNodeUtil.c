@@ -674,3 +674,8 @@ gboolean is_ASTNode_pointer_op(const ASTNode * node)
 {
 	return is_ASTNode_kind_binary_operator(node) && is_ASTNode_has_text(node, "->");
 }
+
+gboolean is_ASTNode_pointer_address_op(const ASTNode * node)
+{
+	return is_ASTNode_has_text(node, "root") && is_ASTNode_function_parameter(node);
+}
